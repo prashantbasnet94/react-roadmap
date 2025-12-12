@@ -40,26 +40,6 @@ we use setCount to update  the state, react will handle the rest olike re-render
 ```
 
 
-# Virutal Dom 
-
-Like weight in mermory of actuall dom. A js object to mirror actual DOM elements. 
-
-
-When state changes:
-  1. React update the virtual Dom first
-  2. React then does diffing process where it compares this update virutal dom with the prev version of virtual Dom
-  3. React figures out what changed without touching the real dom yet
-  4. React updates the real dom as efficeintly as possible. 
-
-Virtual Dom is a tool that allows React to minimize direct manipulation of the real DOM. 
-When dom changes, it's expensive browser has to do alot of work:
-1. Recalculate Layout
-2. reapply styles
-3. Repaint parts of the Screens
-
-By using virtual dom., react batch and optimize these changes by reducing the number of times real dom has to be touched. 
-
- It's a buffer or middlelayer. 
 
  
 
@@ -187,7 +167,22 @@ One of the reason why React has remained so powerfuol & popular over the years.
 
 **Your Answer:**
 ```
-[Write your answer here]
+One directional data flow from parent to child. 
+Make debugging easy.
+
+SSR: Server Side Rendering
+Ecosysterm built on the top of react has these features. 
+Allow intial html to be generated on the server. 
+
+
+Strong Ecosystem:
+1. React Router
+2. React Native
+3. React Testing Library
+4. React Query
+5. React Hook Form
+
+
 ```
 
 **Key Points to Cover:**
@@ -205,7 +200,30 @@ One of the reason why React has remained so powerfuol & popular over the years.
 
 **Your Answer:**
 ```
-[Write your answer here]
+
+# Virutal Dom 
+
+Like weight in mermory of actuall dom. A js object to mirror actual DOM elements. 
+
+
+When state changes:
+  1. React update the virtual Dom first
+  2. React then does diffing process where it compares this update virutal dom with the prev version of virtual Dom
+  3. React figures out what changed without touching the real dom yet
+  4. React updates the real dom as efficeintly as possible. 
+
+Virtual Dom is a tool that allows React to minimize direct manipulation of the real DOM. 
+When dom changes, it's expensive browser has to do alot of work:
+1. Recalculate Layout
+2. reapply styles
+3. Repaint parts of the Screens
+
+By using virtual dom., react batch and optimize these changes by reducing the number of times real dom has to be touched. 
+
+ It's a buffer or middlelayer. 
+
+
+
 ```
 
 **Key Points to Cover:**
@@ -221,7 +239,11 @@ One of the reason why React has remained so powerfuol & popular over the years.
 
 **Your Answer:**
 ```
-[Write your answer here]
+ Keeps the representaiton of dom in memory
+ When something chnages in the dom, it updates the virtual dom first
+ Then it does diffing process where it compares the new virtual dom with the previous virtual dom
+ React figures out what changed without touching the real dom, 
+ React then updates the real dom as efficiently as possible. 
 ```
 
 **Key Points to Cover:**
@@ -230,7 +252,7 @@ One of the reason why React has remained so powerfuol & popular over the years.
 3. **Reconcile:** Calculate minimal set of changes
 4. **Commit:** Apply changes to real DOM in batch
 
-**The Process:**
+**The Process:** 
 ```
 State Change
     ↓
@@ -249,7 +271,27 @@ Batch update real DOM
 
 **Your Answer:**
 ```
-[Write your answer here]
+Shadow dom is browser feature while virtual dom is a programming concept. 
+Shadow dom is a browser feature that allows you to create a private DOM tree that is not accessible from the outside.
+
+SHadow dom is browser feature that allows us to create private DOM tree that is not accecibble from outside. 
+Shadow dom is used to creawte encapsulated compoents. 
+
+Why do we need encapsulated components?
+  1. Style Isolation
+  2. Behavior Encapsulation: To prevent script or data conflicts or leaking out
+  3. To promote reusability: Encapsulated components are more modular and self contained. 
+  5. To promote Maintainability: It's easier to maintain and debug these compoents.
+
+
+
+In essence the shadow dom is used to make robust, maintainable and scaleable application by keeping components independent & predictable.  
+Shadow dom is used to create encapsulated components.
+
+Example of shadow dom is 
+  1. Web components
+  2. Custom elements
+
 ```
 
 **Comparison Table:**
@@ -268,7 +310,11 @@ Batch update real DOM
 
 **Your Answer:**
 ```
-[Write your answer here]
+
+Real Dom is the actual live representation of the view or web page we see in the application. 
+
+Virtual Dom is a light weight copy of that copy of real dom, it's the programming optimization concept. 
+
 ```
 
 **Comparison:**
@@ -303,7 +349,7 @@ element.textContent = 'Hello';   // Reflow + Repaint
 
 **Your Answer:**
 ```
-[Write your answer here]
+Entire process or cycle of diffing of current virutal dom to previous to determine the acutal changes & apply that changes in minimum effort to update the real dom. The entire cycle is called Reconciliation. 
 ```
 
 **Key Points to Cover:**
@@ -328,7 +374,24 @@ element.textContent = 'Hello';   // Reflow + Repaint
 
 **Your Answer:**
 ```
-[Write your answer here]
+Efficiently compares two dom tree. 
+
+Kep pricniple of diffing alogirthm is comparing two trees. 
+
+Diffing algorithm is the core of virtual dom.  
+
+it's especilized in tree strucuture:
+1. Heuristic based comparison, (makes SMART decision)
+  a. Compares elememnt at the same level at the tree
+  b. if two elements have same type it will assume it's the same component. 
+  c. Component identity is determined by key,
+  d. When it comes to lists, React uses keys to quickly identify which items have changed, been added, or removed.
+4. Optimistic Update: Unless proved otherwise.
+
+
+
+In essence, heuristics means React makes smart guesses based on the common patterns
+
 ```
 
 **Key Points to Cover:**
@@ -351,7 +414,11 @@ element.textContent = 'Hello';   // Reflow + Repaint
 
 **Your Answer:**
 ```
-[Write your answer here]
+1. Element Type Comparison: if type changed in old vs new type , destroy old & build new type in the dom
+2. Keyed reconcilliation for List, react uses key to indentify what elemnt changed or deleted.
+3. Same level comparision: Only the element at the same level are compared which avoid deep costly comparions. 
+4. Optimistic Updates: React assumes most components do not change between renders
+
 ```
 
 **The Two Main Rules:**
@@ -429,19 +496,24 @@ element.textContent = 'Hello';   // Reflow + Repaint
 
 ## 📝 Summary Notes
 
-**Why Virtual DOM exists:**
-```
-[Write your understanding of WHY Virtual DOM was created]
+
+**Why would Virtual DOM be faster than direct manipulation?**
 ```
 
-**How it works (in your own words):**
+  1. Direct manipulation means reflow & repaint meaning screen with recalculating new layout.
+  2. With virutal dom, we know what changed and we are determined to apply minimal changes either through batching or in once. 
+
 ```
-[Explain the full process from state change to DOM update]
-```
+
 
 **When would Virtual DOM be SLOWER than direct manipulation?**
 ```
-[Think about edge cases]
+
+  When the updates are extremly minimal & the process of reconcilliation i.e over head of diffing & batching is more costly than just simply updating dom. for example, chaning one elemnt style. 
+  
+  Directly updating dom saves extra steps of creating & comparing the virtual DOM. 
+
+
 ```
 
 ---
@@ -449,14 +521,14 @@ element.textContent = 'Hello';   // Reflow + Repaint
 ## ✅ Self-Check
 
 Mark when you can confidently explain:
-- [ ] What React is and its core philosophy
-- [ ] The evolution from MVC to React
-- [ ] What the Virtual DOM is (can draw a diagram)
-- [ ] How reconciliation works step-by-step
-- [ ] The diffing algorithm and its rules
-- [ ] Shadow DOM vs Virtual DOM
-- [ ] Real DOM vs Virtual DOM trade-offs
-- [ ] When to use keys and why they matter
+- [✅ ] What React is and its core philosophy
+- [✅ ] The evolution from MVC to React
+- [✅ ] What the Virtual DOM is (can draw a diagram)
+- [✅ ] How reconciliation works step-by-step
+- [✅ ] The diffing algorithm and its rules
+- [✅ ] Shadow DOM vs Virtual DOM
+- [✅ ] Real DOM vs Virtual DOM trade-offs
+- [✅ ] When to use keys and why they matter
 
 ---
 
@@ -465,19 +537,13 @@ Mark when you can confidently explain:
 After studying, practice answering these OUT LOUD:
 
 1. **"Explain how React's Virtual DOM works to a non-technical person"**
-   - Practice explaining without technical jargon
-   - Use analogies (blueprint, shopping list, etc.)
+
+   It's like  reharsal practice before the actual performance. Instead of adjusting the actual stage everytime there is change, you first run through a mock stage. Once you are confident that everything is perfect and aligned, then you go ahead and update the final stage.  
 
 2. **"When would the Virtual DOM be slower than direct DOM manipulation?"**
-   - Think about simple apps with few updates
-   - Very small updates
-   - Static pages
+  when the changes are so minimal that the overhead of diffing and reconcillation overhead is greater than directly manipulating DOM. 
 
 **Time yourself:** Aim for 3-5 minute answers
 
 ---
 
-**Study Progress:**
-- Started: ___________
-- Completed: ___________
-- Ready for hands-on: [ ]
