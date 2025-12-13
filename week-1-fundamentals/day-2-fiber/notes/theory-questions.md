@@ -11,7 +11,17 @@
 
 **Your Answer:**
 ```
-[Write your answer here]
+
+Fundamental architeture of react that transitioned from sync, block rendering model to aync, interuptible rendering to alllow priorize updates.
+
+
+For example ensuring critical task like user input are handled immdediately.
+
+Before fiber, a large rendering would monopolize & block the main thread until the task is completed leading to freezing or lag.
+
+Fiber's async & interruptible design allows React to pause it's work & let the main thread handle urgert things & resume the work letter
+thus avoid blocking.
+
 ```
 
 **Key Points to Cover:**
@@ -53,7 +63,23 @@ Before Fiber (React 15):
 
 **Your Answer:**
 ```
-[Write your answer here]
+As our body is made out of billions of fiber these fiber makes our body resilent and flexible.
+Similarly, the fiber in react are doing the same thing in software side.
+They break down the bigger rendering task into smaller chunks & managable pieces,
+
+ These chunks can be prioritzed. React can pause whatever it's doing & prioritize task based on urgency:
+      a. High priority: user Inputs
+      b. Medium priority: data fetch
+      c. Low Priority: Logging or analytics
+
+
+
+1. To enable the incremnetal rendering
+2. Break the rendering work into smaller chunks
+2. Allow react to pause and resume the work by avoiding main thread blocking
+
+
+Ultimatly to improve user expericene by making the app smoother & more responsive
 ```
 
 **Primary Goals:**
@@ -104,7 +130,12 @@ Keep UI responsive
 
 **Your Answer:**
 ```
-[Write your answer here]
+React can work on multiple task at the same time without having to finsh one completly.
+ Quickly switching between task and prioritze the task is what concurrent rendering.
+
+
+ React can start redering a part of a component, pause it if needed and go handle user input so the whole app feels smooth.
+
 ```
 
 **Definition:**
@@ -144,6 +175,28 @@ Time →
 
 **Real-World Example:**
 ```javascript
+
+
+function TransitionExample() {
+    const [ input, setInput ] = useState('')
+    const [ list, setList ] = useState([])
+    const [ isPending, startTransition ] = useTransition()
+
+
+    const handleChange = (e) => {
+        setInput(e.target.value)
+        startTransition(() => {
+            const newList = Array.from({length: 20000}, (_, i) => ({id: i}))
+            setList(newList)
+        })
+    }
+}
+
+```
+
+
+```
+
 // Heavy computation happening
 function SearchResults() {
   const [query, setQuery] = useState('');
@@ -222,7 +275,11 @@ Concurrent Features: Opt-in per update/component
 
 **Your Answer:**
 ```
-[Write your answer here]
+React update the screen in two phase
+1. Reconcilliation: which can be paused
+2. Commit to the Dom : which cannot be paused.
+
+
 ```
 
 **The Two-Phase Process:**
@@ -298,7 +355,13 @@ Commit Phase: "Make it happen!"                (Must be fast & sync)
 
 **Your Answer:**
 ```
-[Write your answer here]
+Any state updates that happen in the current event. 10s , 100s , all are waited and processed them all at once in one render
+This means component rerneder once, even if you  can setState multiple times.
+
+React automatically batches multiple state update that happen during the same event loop.
+If you have bunch of setState calss that all happen in response to the same user action, like a single click. React will group them together and process them all at once in a single render.
+
+
 ```
 
 **Batching Definition:**
@@ -485,17 +548,19 @@ between updates.
 
 **Why Fiber was created:**
 ```
-[Explain in your own words why React needed to be rewritten]
+To break bigger sync rendering into smaller chucks which can be inturrpted and prioritzed.
 ```
 
 **How concurrent rendering changes React:**
 ```
-[Describe the mental model shift]
+  It allow react can pause, resume and priritize react rendering. Thus makes react adaptable & responsive.
+
 ```
 
 **React 17 vs React 18 batching:**
 ```
-[Key differences and why it matters]
+ in 17, batching are mostly limited to sync updates like event handlers. Aync updates, like promises or setTimeout were not batched together.
+ in 18, automatic batching works acorss the board inculdig aync updates.
 ```
 
 ---
@@ -503,14 +568,14 @@ between updates.
 ## ✅ Self-Check
 
 Mark when you can confidently explain:
-- [ ] What Fiber is and why it was necessary
-- [ ] The main goals of Fiber architecture
-- [ ] Concurrent rendering vs traditional rendering
-- [ ] History: Async mode → Concurrent mode → Concurrent features
-- [ ] Two phases: Render and Commit
-- [ ] How batching works in React 17 vs 18
-- [ ] When and how to use flushSync
-- [ ] Real-world benefits of concurrent features
+- [✅] What Fiber is and why it was necessary
+- [✅ ] The main goals of Fiber architecture
+- [✅] Concurrent rendering vs traditional rendering
+- [✅] History: Async mode → Concurrent mode → Concurrent features
+- [✅] Two phases: Render and Commit
+- [✅] How batching works in React 17 vs 18
+- [✅] When and how to use flushSync
+- [✅] Real-world benefits of concurrent features
 
 ---
 
@@ -565,7 +630,3 @@ After:  Start render → Pause for urgent work → Resume → Smooth UI
 
 ---
 
-**Study Progress:**
-- Started: ___________
-- Completed: ___________
-- Ready for hands-on: [ ]
