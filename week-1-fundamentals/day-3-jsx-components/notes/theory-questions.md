@@ -55,7 +55,12 @@ const element = _jsx('h1', {
 
 **Your Answer:**
 ```
-[Write your answer here]
+Component are blueprint for your ui. Function or class that defines how the UI should look like.
+Component returns the element object, that element object is what appear in the screen.
+
+
+Elements are the bricks or the building blocks of the house.
+
 ```
 
 **Key Differences:**
@@ -112,7 +117,9 @@ Component is called → Returns element → Element describes UI
 
 **Your Answer:**
 ```
-[Write your answer here]
+1. class based
+2. function based
+3. using React.memo
 ```
 
 **Three Ways:**
@@ -224,7 +231,10 @@ class ErrorBoundary extends React.Component {
 
 **Your Answer:**
 ```
-[Write your answer here]
+Consistency: (For same input) => its the same output.
+No side effects
+Only uses props & state no external date or randomness. These are very predictable & testable
+Can be optimized with Memo
 ```
 
 **Definition:**
@@ -286,6 +296,33 @@ obj1 === obj2  // false! Different references
 <MyComponent data={{ value: 1 }} /> // New object each render
 ```
 
+
+
+## Golden Rule
+
+```javascript
+
+Pass down individual primitive props to keep things stable.
+
+function parent(){
+  return <Children name = "prashant" theme = "dark" >
+}
+const Children = Reac.memo(({name, theme}) => {
+  return <div theme = {theme}>{name} </div>
+})
+
+
+vs
+
+Pass an object useMemo to ensure that the object reference stays the same
+function parent(){
+  const config = useMemo(() => ({name: "prashant", theme: "dark}), [])
+  return <Children config = {config}/>
+}
+```
+
+
+
 **When to Use Pure Components:**
 - Component receives same props frequently
 - Component is expensive to render
@@ -303,7 +340,10 @@ obj1 === obj2  // false! Different references
 
 **Your Answer:**
 ```
-[Write your answer here]
+
+Stateless components are just pure functional componets whereas,
+Stateful components are containers component which levraege hooks for side efffects are ussally more dianaminc. Normally holds the data which then they pass down to children.
+
 ```
 
 **Stateless Components (Presentational):**
@@ -385,7 +425,8 @@ function TodoList({ todos, onAdd }) {
 
 **Your Answer:**
 ```
-[Write your answer here]
+Becuase to treat it as an actual component. React will treat components starting with small letter as regular html and that might trigger unexpected behviour in the component.
+
 ```
 
 **The Rule:**
@@ -452,7 +493,14 @@ function Page({ componentType }) {
 
 **Your Answer:**
 ```
-[Write your answer here]
+No browswer does not directly understand JSX. Browswer natively understand html, css & javascript. However JSX written in React are compiled using babel into javacript, resulting js creates virtual DOM. React then uses this virutal DOM into real view.
+It converts those React components into elements.
+
+Babel(JSX) => {
+  React.createElement(JSX)
+
+  // thus after compilation has the virtaul DOM object.
+}
 ```
 
 **Short Answer:**
@@ -521,7 +569,10 @@ Browser-ready code
 
 **Your Answer:**
 ```
-[Write your answer here]
+Earlier version used React.createElement calls. Need import React in every file.
+
+But later transformation, it jsx-runtime was revamped. No need to import React everywhere so bundle size is smaller and other good features.
+
 ```
 
 **The Change (React 17+):**
@@ -597,7 +648,10 @@ function App() {
 
 **Your Answer:**
 ```
-[Write your answer here]
+1. return single root element
+2. all jsx tag need to be closed
+3. use camelCase for atrributes.
+4. Use curly braces for js
 ```
 
 **The 5 Core Rules:**
@@ -698,7 +752,8 @@ return () => <div />;            // Function
 
 **Your Answer:**
 ```
-[Write your answer here]
+  becuase jsx => js, js requires that each return statement only returns one single element.
+
 ```
 
 **The Reason:**
@@ -780,7 +835,11 @@ function Component() {
 
 **Your Answer:**
 ```
-[Write your answer here]
+
+It automaticaly escapes any values that are inserted into the markup.
+Special characters like < ,>, &  are converted into safe strings
+
+
 ```
 
 **JSX is Secure by Default:**
@@ -870,17 +929,20 @@ If you must use it, sanitize first!
 
 **JSX in one sentence:**
 ```
-[Your explanation]
+Javascript version of xml.
 ```
 
 **Elements vs Components:**
 ```
-[Explain the relationship]
+Elements are the building block of the view, where are components are blueprint
 ```
 
 **Why function components won over class components:**
 ```
-[Key reasons]
+It's easier and concise.
+With introduction of hooks, they can manage state, sideEffects.
+
+Functional componenta are better in terms of performance & less boiler plate.
 ```
 
 ---
@@ -888,17 +950,17 @@ If you must use it, sanitize first!
 ## ✅ Self-Check
 
 Mark when you can confidently explain:
-- [ ] What JSX is and how it compiles
-- [ ] Difference between elements and components
-- [ ] Three ways to create components
-- [ ] When to use class vs function components
-- [ ] Pure components and React.memo
-- [ ] Stateless vs stateful components
-- [ ] Why component names capitalize
-- [ ] New JSX transform benefits
-- [ ] All JSX rules
-- [ ] Why wrapping is required
-- [ ] JSX security features
+- [✅] What JSX is and how it compiles
+- [✅] Difference between elements and components
+- [✅] Three ways to create components
+- [✅] When to use class vs function components
+- [✅] Pure components and React.memo
+- [✅] Stateless vs stateful components
+- [✅] Why component names capitalize
+- [✅] New JSX transform benefits
+- [✅] All JSX rules
+- [✅] Why wrapping is required
+- [✅] JSX security features
 
 ---
 
@@ -924,8 +986,3 @@ Mark when you can confidently explain:
 **Time:** 2-3 minutes
 
 ---
-
-**Study Progress:**
-- Started: ___________
-- Completed: ___________
-- Ready for hands-on: [ ]
