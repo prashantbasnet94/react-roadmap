@@ -11,7 +11,10 @@
 
 **Your Answer:**
 ```
-[Write your answer here]
+Component internal data that can change over time.  Owned and managed by components.
+
+When these updates, React re-renders the component. 
+State should be treated as immutable, don;t mutate directly instead set the new value using setState
 ```
 
 **Key Points to Cover:**
@@ -50,7 +53,9 @@ function Counter() {
 
 **Your Answer:**
 ```
-[Write your answer here]
+Inputs passed by parent to child, like function parameters. 
+These are readonly  & unidirectional for receiving components
+
 ```
 
 **Key Points to Cover:**
@@ -91,7 +96,8 @@ function Welcome({ name, age }) {
 
 **Your Answer:**
 ```
-[Write your answer here]
+
+Props are read only inputs components receives, whereas states are multable data owned by compoents. 
 ```
 
 **Comparison Table:**
@@ -149,7 +155,9 @@ A component's state can become a child's props
 
 **Your Answer:**
 ```
-[Write your answer here]
+Props are read only, allowing children to mutate props break one way data flow and make ownership unclear.
+If needed children should ask the parent to update the value using callback prop.
+
 ```
 
 **Short Answer:**
@@ -233,7 +241,11 @@ function Child({ name, onNameChange }) {
 
 **Your Answer:**
 ```
-[Write your answer here]
+
+In react props are conceptually read only by design. 
+In ts you can enforce them by ReadOnly<>, 
+we can also use PropTypes of runtime type validation though it does not enforece immutablitiy.
+
 ```
 
 **TypeScript Way (Best for Large Apps):**
@@ -303,7 +315,8 @@ function Component(props) {
 
 **Your Answer:**
 ```
-[Write your answer here]
+1. PropTypes => runTime validation in dev
+2. Typescript compile time validdtaion for props readonly
 ```
 
 **Method 1: PropTypes (Runtime Validation)**
@@ -396,7 +409,7 @@ function User({ name, age = 18, email, onSave, status }: UserProps) {
 
 **Your Answer:**
 ```
-[Write your answer here]
+Fallback values used when parent does not provie a prop.
 ```
 
 **Definition:**
@@ -448,7 +461,7 @@ function Welcome({ name = 'Guest', age = 0 }: Props) {
 
 **Your Answer:**
 ```
-[Write your answer here]
+if you pass a props without a value, it is set to true by defualt.
 ```
 
 **The Rule:**
@@ -527,7 +540,8 @@ Mirrors HTML behavior:
 
 **Your Answer:**
 ```
-[Write your answer here]
+Directly mutating the state breaks React's change detection and also prevent re-render as data reference might not have changed.
+
 ```
 
 **Short Answer:**
@@ -590,7 +604,9 @@ setItems(items.concat(4)); // Also works
 
 **Your Answer:**
 ```
-[Write your answer here]
+
+if current state depends on previous state, we should pass an update function so the react uses latest value.
+
 ```
 
 **Purpose:**
@@ -640,7 +656,11 @@ setCount(c => c + 1);  // c = 2, returns 3
 
 **Your Answer:**
 ```
-[Write your answer here]
+ 
+ setState({
+  ...state,
+  [key]: value
+ })
 ```
 
 **Computed Property Names:**
@@ -727,7 +747,10 @@ setFormData(prev => ({
 
 **Your Answer:**
 ```
-[Write your answer here]
+
+state update are aync & batched, passing a function ensures the updates uses latest state vlaue instead of a stale one.
+
+if the current state depends on prev state always pass a updater function 
 ```
 
 **Already covered in OQ2, but here's a summary:**
@@ -773,7 +796,8 @@ setCount(prevCount => {
 
 **Your Answer:**
 ```
-[Write your answer here]
+Only on class comppments states updates are mereged automocatilly, using react hooks, state updates  need to be merged manually.
+
 ```
 
 **Hooks - No Automatic Merging:**
